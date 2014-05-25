@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/demo.css">
     <style type="text/css">
     .deposer {
-        width: 400px;
+        width: 700px;
         height: 400px;
         border: 1px solid blue;
     }
@@ -116,7 +116,6 @@ background-image:linear-gradient(top,#FFFFFF,#CCFFCC);
     cursor: move;
 }
 
-
 .fleche_fin {
     width: 10px;
     height: 10px;
@@ -204,12 +203,15 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
       var element=$("#"+globalinput.attr("selectedElement"));
       var input=$('#'+id)
       element.attr(attribute,input.prop("value"));
+      if(attribute=="nom")
+        element.text(input.prop("value"))
  }
  function showPanel(id) {
 
       
       var panel=$(id);
-     panel.css("display", "block");
+      if (panel.attr("selectedElement")!=undefined&&panel.attr("selectedElement")!="") {panel.css("display", "block");}
+      else alert("no element selected")
 
  }
 
@@ -218,14 +220,13 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
       <table style="position:absolute; left:100px; top:100px;">
         <tr>
             <td style="width: 100px; height: 25px;">
-                
             </td>
-            <td style="width: 100px; height: 25px;"  >
+            <td style="width: 200px; height: 25px;"  >
                <button onclick="javascript:showPanel('#detailEtape')">detail etape</button> 
-
+               <button>detail Rubrique</button>
             </td>
-            <td style="width: 100px; height: 25px;">
-                detail condition
+            <td style="width: 200px; height: 25px;">
+                <button>detail condition</button>
             </td>
             <td colspan="2" style="width: 300px; height: 25px;">
                  
@@ -235,16 +236,16 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
             <td style="width: 100px; height: 100px;">
                 <div class="tache" style="width: 50px; height: 50px;margin:auto;display: block; cursor: auto;"></div>
             </td>
-            <td colspan="2" rowspan="4">
-                <div class="deposer demo flowchart-demo container"  id="flowchart"
-                style="display: block; overflow: auto; background-color: white"></div>
+            <td  colspan="2" rowspan="4">
+                <div class="deposer flowchart-demo container"  id="flowchart"
+                style="display: block;background-color: white"></div>
             </td>
             <td   id="detailEtape" colspan="2" rowspan="4" style="display:none">
                  <center><b>detail etape</b></center><br/>
                  <br/>
                 Nom :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input   id="inputNom" type="text"  onchange="javascript:applyUpdateInfo('inputNom','nom')"  /><br/><br/>
-                Date Debut :<input id="dateDebut" type="date"  onchange="javascript:applyUpdateInfo('inputdateDebut','dateDebut')"  /><br/><br/>
-                Date Fin :&nbsp;&nbsp;&nbsp; <input id="dateFin" type="date"  onchange="javascript:applyUpdateInfo('inputdateFin','dateFin')"  /><br/><br/>
+                Date Debut :<input id="inputdateDebut" type="date"  onchange="javascript:applyUpdateInfo('inputdateDebut','dateDebut')"  /><br/><br/>
+                Date Fin :&nbsp;&nbsp;&nbsp; <input id="inputdateFin" type="date"  onchange="javascript:applyUpdateInfo('inputdateFin','dateFin')"  /><br/><br/>
         </tr>
         <tr>
             <td style="width: 100px; height: 100px;">
@@ -254,14 +255,10 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
             </td>
             
         </tr> 
-        <tr >
+        <tr>
             <td style="width: 100px; height: 100px;">
-
                 <div class="start" style="margin:auto;display: block; cursor: auto;"></div>
-
             </td>
-           
-
         </tr>
         <tr>
             <td style="width: 100px; height: 100px;">

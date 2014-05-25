@@ -142,10 +142,14 @@
                 console.log("connection " + params.connection.id + " was moved");
             });
         });
+
+
 function setSelected(element){
+
+    $(".node").css("border", "");
     var input=$("#detailEtape");
     input.attr("selectedElement",element)
-
+    $("#"+element).css("border", "2px solid #0000FF");
 }
 
 var compteur=1;
@@ -165,6 +169,7 @@ $(".stop").draggable({
 $(".fleche").draggable({
     helper : 'clone'
 });
+
 $(".deposer").resizable();
 $(".deposer")
 .droppable(
@@ -176,29 +181,19 @@ drop : function(event, ui) {
             + (ui.position.left - 100)
             + 'px ;top:'
             + (ui.position.top)
-            + 'px;" class="window" id="flowchartwindow'+compteur+'"  test=""></div>');
+            + 'px;" class="node window" id="flowchartwindow'+compteur+'"  test=""></div>');
 
                                     //dropped.draggable();
                                     dropped.resizable({
                                       resize: function( event, ui ) {instance.repaintEverything();}
                                   });
-                                    $(this).append(dropped);
-                                    instance.draggable($("#flowchartwindow"+compteur),{ grid: [20, 20] });  
-                                    _addEndpoints("window"+compteur,  ["TopCenter", "RightMiddle"],["LeftMiddle", "BottomCenter"]);
-                                    compteur++;
-                                } else if (ui.draggable.hasClass('start')) {
-                                    var dropped = $('<div style="position:absolute;left:'
-                                        + (ui.position.left - 100)
-                                        + 'px ;top:'
-                                        + (ui.position.top)
-                                        + 'px;"    id="flowchartstart'+compteur+'" class="start2"></div>');
-                                   // dropped.draggable();
-                                   $(this).append(dropped);
-                                   instance.draggable($("#flowchartstart"+compteur),{ grid: [20, 20] }); 
-                                   $("#flowchartstart"+compteur).click(
- function(){
+                                    
+                                 
+                                   dropped.click(
+ function(e){
       // to repaint the connections and endpoints
     //followed by your code
+    e.stopPropagation();
     var box=$( this );
     var id=box.attr('id');
     setSelected(id);
@@ -213,7 +208,43 @@ drop : function(event, ui) {
     inputDateDebut.prop("value",box.attr("dateDebut"));
 }
 );
-                                    $("#flowchartstart"+compteur).click();
+                                   
+                                   $(this).append(dropped);
+                                   instance.draggable($("#flowchartwindow"+compteur),{ grid: [20, 20] });
+                                    _addEndpoints("window"+compteur,  ["TopCenter", "RightMiddle"],["LeftMiddle", "BottomCenter"]);
+                                    compteur++;
+                                    dropped.click()
+                                } else if (ui.draggable.hasClass('start')) {
+                                    var dropped = $('<div style="position:absolute;left:'
+                                        + (ui.position.left - 100)
+                                        + 'px ;top:'
+                                        + (ui.position.top)
+                                        + 'px;"    id="flowchartstart'+compteur+'" class="node start2"></div>');
+                                   // dropped.draggable();
+                                   $(this).append(dropped);
+                                   instance.draggable($("#flowchartstart"+compteur),{ grid: [20, 20] }); 
+                                   dropped.click(
+ function(e){
+      // to repaint the connections and endpoints
+    //followed by your code
+    e.stopPropagation();
+    var box=$( this );
+    var id=box.attr('id');
+    setSelected(id);
+    var inputNom=$("#inputNom");
+    var inputDateDebut=$("#inputdateDebut");
+    var inputDateFin=$("#inputdateFin");
+    inputNom.prop("value","");
+    inputNom.prop("value",box.attr("nom"));
+    inputDateFin.prop("value","");
+    inputDateFin.prop("value",box.attr("dateFin"));
+    inputDateDebut.prop("value","");
+    inputDateDebut.prop("value",box.attr("dateDebut"));
+}
+);
+
+                                  
+                                    
                                  //  instance.draggable($("#flowchartstart"+compteur),{ grid: [20, 20] });  
                                    /*$("#flowchartstart"+compteur).draggable(
                                     {
@@ -227,18 +258,42 @@ drop : function(event, ui) {
                                     });*/
                                    _addEndpoints("start"+compteur, ["RightMiddle" ],[] );
                                    compteur++;
+                                   dropped.click();
                                } else if (ui.draggable.hasClass('stop')) {
                                 var dropped = $('<div style="position:absolute;left:'
                                     + (ui.position.left - 100)
                                     + 'px ;top:'
                                     + (ui.position.top)
-                                    + 'px;"    id="flowchartstop'+compteur+'" class="stop2"></div>');
+                                    + 'px;"    id="flowchartstop'+compteur+'" class="stop2 node"></div>');
                                    // dropped.draggable();
-                                   $(this).append(dropped);
+                                   
 
-                                   instance.draggable($("#flowchartstop"+compteur),{ grid: [20, 20] });  
+                                   
+                                   dropped.click(
+ function(e){
+      // to repaint the connections and endpoints
+    //followed by your code
+    e.stopPropagation();
+    var box=$( this );
+    var id=box.attr('id');
+    setSelected(id);
+    var inputNom=$("#inputNom");
+    var inputDateDebut=$("#inputdateDebut");
+    var inputDateFin=$("#inputdateFin");
+    inputNom.prop("value","");
+    inputNom.prop("value",box.attr("nom"));
+    inputDateFin.prop("value","");
+    inputDateFin.prop("value",box.attr("dateFin"));
+    inputDateDebut.prop("value","");
+    inputDateDebut.prop("value",box.attr("dateDebut"));
+}
+); 
+                                   
+                                   $(this).append(dropped);
+                                   instance.draggable($("#flowchartstop"+compteur),{ grid: [20, 20] }); 
                                    _addEndpoints("stop"+compteur, [ ],["LeftMiddle"] );
                                    compteur++;
+                                   dropped.click();
                                }else if (ui.draggable.hasClass('xor')) {
                                 var dropped = $('<div style="position:absolute;left:'
                                     + (ui.position.left - 100)
@@ -249,6 +304,7 @@ drop : function(event, ui) {
                                    $(this).append(dropped);
 
                                    instance.draggable($("#flowchartxor"+compteur),{ grid: [20, 20] });  
+
                                    _addEndpoints("xor"+compteur, [ "TopCenter", "BottomCenter"],["LeftMiddle"] );
                                    compteur++;
                                }
@@ -259,7 +315,9 @@ drop : function(event, ui) {
 
                 });
 
-
+$(".deposer").click(function () {
+    $(".node").css("border", "");
+})
 function saveFlowchart(){
     var nodes = []
     $(".node").each(function (idx, elem) {
