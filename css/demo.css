@@ -1,0 +1,61 @@
+.flowchart-demo .window { border:1px solid #346789;
+box-shadow: 2px 2px 19px #aaa;
+   -o-box-shadow: 2px 2px 19px #aaa;
+   -webkit-box-shadow: 2px 2px 19px #aaa;
+   -moz-box-shadow: 2px 2px 19px #aaa;
+-moz-border-radius:0.5em;
+border-radius:0.5em;
+opacity:0.8;
+filter:alpha(opacity=80);
+
+text-align:center;
+z-index:20; position:absolute;
+ border: 1px solid #33CCFF;
+ background-color:#CCFFFF;
+background-image:-webkit-gradient(linear,50%,0%,50%,100%,color-stop(0%,#FFFFFF),color-stop(100%,#CCFFFF));
+background-image:-webkit-linear-gradient(top,#FFFFFF,#CCFFFF);
+background-image:-moz-linear-gradient(top,#FFFFFF,#CCFFFF);
+background-image:-o-linear-gradient(top,#FFFFFF,#CCFFFF);
+background-image:-ms-linear-gradient(top,#FFFFFF,#CCFFFF);
+background-image:linear-gradient(top,#FFFFFF,#CCFFFF);
+font-family:helvetica;padding:0.5em;
+font-size:0.9em;
+width:150px;
+}
+
+.flowchart-demo .window:hover {
+	box-shadow: 2px 2px 19px #444;
+   -o-box-shadow: 2px 2px 19px #444;
+   -webkit-box-shadow: 2px 2px 19px #444;
+   -moz-box-shadow: 2px 2px 19px #444;
+    opacity:0.6;
+	filter:alpha(opacity=60);
+}
+
+.flowchart-demo .active {
+	border:1px dotted green;
+}
+.flowchart-demo .hover {
+	border:1px dotted red;
+}
+
+
+.flowchart-demo ._jsPlumb_connector { z-index:4; }
+.flowchart-demo ._jsPlumb_endpoint, .endpointTargetLabel, .endpointSourceLabel{ z-index:21;cursor:pointer; }
+
+.flowchart-demo .aLabel {
+ 	background-color:white; 
+	padding:0.4em; 
+	font:12px sans-serif; 
+	color:#444;
+	z-index:21;
+	border:1px dotted gray;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	cursor: pointer;
+}
+.flowchart-demo .aLabel._jsPlumb_hover {
+	background-color:#5C96BC;
+	color:white;	
+	border:1px solid white;
+}
