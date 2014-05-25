@@ -12,7 +12,7 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jsplumb.css">
     <link rel="stylesheet" href="css/demo.css">
-     <style type="text/css">
+    <style type="text/css">
     .deposer {
         width: 400px;
         height: 400px;
@@ -205,6 +205,14 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
       var input=$('#'+id)
       element.attr(attribute,input.prop("value"));
  }
+ function showPanel(id) {
+
+      
+      var panel=$(id);
+     panel.css("display", "block");
+
+ }
+
       </script>
 
       <table style="position:absolute; left:100px; top:100px;">
@@ -212,14 +220,14 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
             <td style="width: 100px; height: 25px;">
                 
             </td>
-            <td style="width: 100px; height: 25px;">
-                detail etape
+            <td style="width: 100px; height: 25px;"  >
+               <button onclick="javascript:showPanel('#detailEtape')">detail etape</button> 
 
             </td>
             <td style="width: 100px; height: 25px;">
                 detail condition
             </td>
-            <td colspan="2" style="width: 100px; height: 25px;">
+            <td colspan="2" style="width: 300px; height: 25px;">
                  
             </td>
         </tr>
@@ -231,9 +239,12 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
                 <div class="deposer demo flowchart-demo container"  id="flowchart"
                 style="display: block; overflow: auto; background-color: white"></div>
             </td>
-            <td   id="detailEtape" colspan="2" rowspan="2" style="width: 100px; height: 25px;">
-                 detail etape
-                 <input   id="input1" type="text"  onchange="javascript:applyUpdateInfo('input1','test')"  />
+            <td   id="detailEtape" colspan="2" rowspan="4" style="display:none">
+                 <center><b>detail etape</b></center><br/>
+                 <br/>
+                Nom :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input   id="inputNom" type="text"  onchange="javascript:applyUpdateInfo('inputNom','nom')"  /><br/><br/>
+                Date Debut :<input id="dateDebut" type="date"  onchange="javascript:applyUpdateInfo('inputdateDebut','dateDebut')"  /><br/><br/>
+                Date Fin :&nbsp;&nbsp;&nbsp; <input id="dateFin" type="date"  onchange="javascript:applyUpdateInfo('inputdateFin','dateFin')"  /><br/><br/>
         </tr>
         <tr>
             <td style="width: 100px; height: 100px;">
@@ -249,12 +260,7 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
                 <div class="start" style="margin:auto;display: block; cursor: auto;"></div>
 
             </td>
-           <td rowspan="2" style="width: 100px; height: 25px;">
-                rubrique generique
-            </td>
-            <td rowspan="2" style="width: 100px; height: 25px;">
-                rubrique select
-            </td>
+           
 
         </tr>
         <tr>

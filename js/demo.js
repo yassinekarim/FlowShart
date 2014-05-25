@@ -6,7 +6,7 @@
             // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
             // case it returns the 'labelText' member that we set on each connection in the 'init' method below.
             ConnectionOverlays : [
-            [ "Arrow", { location:1 } ],
+            [ "Arrow", { location:1 ,width:10,length:10} ],
             [ "Label", { 
                 location:0.1,
                 id:"label",
@@ -202,9 +202,15 @@ drop : function(event, ui) {
     var box=$( this );
     var id=box.attr('id');
     setSelected(id);
-    var input=$("#input1");
-    input.prop("value","");
-    input.prop("value",box.attr("test"));
+    var inputNom=$("#inputNom");
+    var inputDateDebut=$("#inputdateDebut");
+    var inputDateFin=$("#inputdateFin");
+    inputNom.prop("value","");
+    inputNom.prop("value",box.attr("nom"));
+    inputDateFin.prop("value","");
+    inputDateFin.prop("value",box.attr("dateFin"));
+    inputDateDebut.prop("value","");
+    inputDateDebut.prop("value",box.attr("dateDebut"));
 }
 );
                                     $("#flowchartstart"+compteur).click();
