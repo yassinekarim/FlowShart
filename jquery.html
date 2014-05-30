@@ -12,165 +12,6 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jsplumb.css">
     <link rel="stylesheet" href="css/demo.css">
-    <style type="text/css">
-    .deposer {
-        width: 700px;
-        height: 400px;
-        border: 1px solid blue;
-    }
-    table,th,td
-    {
-        border:1px solid black;
-    }
-    .tache,.tache2 {
-        width: 50px;
-        height: 30px;
-        border: 1px solid #33CCFF;
-        background-color:#CCFFFF;
-		background-image:-webkit-gradient(linear,50%,0%,50%,100%,color-stop(0%,#FFFFFF),color-stop(100%,#CCFFFF));
-	background-image:-webkit-linear-gradient(top,#FFFFFF,#CCFFFF);
-background-image:-moz-linear-gradient(top,#FFFFFF,#CCFFFF);
-background-image:-o-linear-gradient(top,#FFFFFF,#CCFFFF);
-background-image:-ms-linear-gradient(top,#FFFFFF,#CCFFFF);
-background-image:linear-gradient(top,#FFFFFF,#CCFFFF);
-        display: inline-block;
-        position: absolute;
-        cursor: move;
-        border-radius: 15px;
-        z-index:900;
-    }
-    .xor,.xor2{
-       width:30px; 
-       height:30px; 
-       border:1px solid #000; 
-         background-color: #CCFFCC;
-
-	background-image:-webkit-gradient(linear,50%,0%,50%,100%,color-stop(0%,#FFFFFF),color-stop(100%,#CCFFCC));
-	background-image:-webkit-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:-moz-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:-o-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:-ms-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:linear-gradient(top,#FFFFFF,#CCFFCC);
-    border: 1px solid rgb(62, 166, 33);
-       margin:3px 0 0 30px;
-       -webkit-transform: rotate(-45deg);
-       -moz-transform: rotate(-45deg);
-       -ms-transform: rotate(-45deg);
-       -o-transform: rotate(-45deg);
-       transform: rotate(-45deg);
-       -webkit-transform-origin: 0 100%;
-       -moz-transform-origin: 0 100%;
-       -ms-transform-origin: 0 100%;
-       -o-transform-origin: 0 100%;
-       transform-origin: 0 100%;
-   }
-   .cross {
-     width: 25px;
-     height: 25px;
-     position: relative;
-     top:6px;
-     left:13px;
-     
-     position: relative;
-     
-     margin:auto;
-     -webkit-transform: rotate(-45deg);
-     -moz-transform: rotate(-45deg);
-     -ms-transform: rotate(-45deg);
-     -o-transform: rotate(-45deg);
-     transform: rotate(-45deg);
-     -webkit-transform-origin: 0 100%;
-     -moz-transform-origin: 0 100%;
-     -ms-transform-origin: 0 100%;
-     -o-transform-origin: 0 100%;
-     transform-origin: 0 100%;
- }
-
- .cross:before, .cross:after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background: rgb(62, 166, 33);
-}
-
-.cross:before {
-  left: 50%;
-  width: 10%;
-  margin-left: -5%;
-  height: 100%;
-}
-
-.cross:after {
-  top: 50%;
-  height: 10%;
-  margin-top: -5%;
-  width: 100%;
-}
-.fleche_debut {
-    width: 3px;
-    height: 3px;
-    display: block;
-    background-color: rgb(0,0,0);
-    z-index:1000;
-    position: absolute;
-    cursor: move;
-}
-
-.fleche_fin {
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    display: inline-block;
-    -ms-transform: rotate(45deg); /* Internet Explorer */
-    -moz-transform: rotate(45deg); /* Firefox */
-    -webkit-transform: rotate(45deg); /* Safari et Chrome */
-    -o-transform: rotate(45deg); /* Opera */
-    position: absolute;
-    z-index:1000;
-    cursor: move;
-}
-
-.start,.start2 {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-	    background-color: #CCFFCC;
-
-	background-image:-webkit-gradient(linear,50%,0%,50%,100%,color-stop(0%,#FFFFFF),color-stop(100%,#CCFFCC));
-	background-image:-webkit-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:-moz-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:-o-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:-ms-linear-gradient(top,#FFFFFF,#CCFFCC);
-background-image:linear-gradient(top,#FFFFFF,#CCFFCC);
-    border: 1px solid rgb(62, 166, 33);
-    display: inline-block;
-    cursor: move;
-    z-index:900;
-    position: absolute;
-}
-
-.stop,.stop2 {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: red;
-	background-image:-webkit-gradient(linear,50%,0%,50%,100%,color-stop(0%,#FFFFFF),color-stop(100%,#FF99FF));
-	background-image:-webkit-linear-gradient(top,#FFFFFF,#FF99FF);
-background-image:-moz-linear-gradient(top,#FFFFFF,#FF99FF);
-background-image:-o-linear-gradient(top,#FFFFFF,#FF99FF);
-background-image:-ms-linear-gradient(top,#FFFFFF,#FF99FF);
-background-image:linear-gradient(top,#FFFFFF,#FF99FF);
-    border: 1px solid red;
-    display: inline-block;
-    cursor: move;
-    z-index:900;
-    /* position: fixed; */
-}
-.box-line {
-    position:absolute;
-    z-index:10;
-}
-</style>
 </head>
 <body  data-library="jquery">
 
@@ -196,37 +37,188 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
        <script src="js/jquery-1.10.2.js"></script>
     <script src="js/jquery-ui-1.10.4.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>     
+     <script type="text/javascript">
+         var compteurId = 0;
+        function setSelectedRed(element) {
+
+        $(".node").css("border", "");
+        $(".xor2").css("border", "");
+        $("#" + element).css("border", "2px solid red");
+    }
+    function applyUpdateInfo(id, attribute) {
+        var globalinput = $("#panelSaisi");
+        var element = $("#" + globalinput.attr("selectedElement"));
+        var input = $('#' + id);
+        element.attr(attribute, input.prop("value"));
+        if (attribute == "nom")
+            element.text(input.prop("value"));
+    }
+    function showPanel(id) {
+
+        var td = $("#panelSaisi");
+        td.children().css("display", "none");
+        var panel = $(id);
+        if (td.attr("selectedElement") != undefined
+                && td.attr("selectedElement") != "") {
+            panel.css("display", "block");
+        } else
+            alert("no element selected");
+
+    }
+    function isAllnodeVisited()
+    {
+        var nodes=$(".node");
+        var xors=$(".xor2");
+        for (var i = 0; i < nodes.length; i++) {
+            if(nodes[i].getAttribute("visited")!="true")
+                {
+                  setSelectedRed(nodes[i].getAttribute("id"))
+                  alert("le noeud selectionné en rouge n'est pas accessible");
+                  return false;}
+        }
+        for (var i = 0; i < xors.length; i++) {
+            if(xors[i].getAttribute("visited")!="true")
+                {
+                  setSelectedRed(xors[i].getAttribute("id"))
+                  alert("le xor selectionné en rouge n'est pas accessible");
+                  return false;}
+        }
+        return true;
+    }
+    
+    function getData(element, jsonData) {
+        var visited = element.attr("visited");
+        if (visited == "true") {
+            jsonData.Id = element.attr("idFlowChart");
+            return true;
+        } 
+        else {
+            if(!element.hasClass("xor2"))
+            {
+                var nom = element.attr("nom");
+                var dateDebut = element.attr("dateDebut");
+                var dateFin = element.attr("dateFin");
+                element.attr("visited", "true");
+                var id = compteurId++;
+                element.attr("idFlowChart", id);
+                if (nom == undefined || dateDebut == undefined || dateFin == undefined || nom == ""|| dateDebut == "" || dateFin == ""){
+                    setSelectedRed(element.attr("id"))
+                  alert("des information sont manquante au noeud selectionné");
+                    return false;
+                }
+            
+                else {
+                  jsonData.Id = id;
+                  jsonData.nom = nom;
+                  jsonData.dateDebut = dateDebut;
+                  jsonData.dateFin = dateFin;
+                  if(element.hasClass("stop2"))
+                  {
+                    return true;
+                  }
+                  var connections=window.instance.getConnections({source:element.attr("id")});
+                  if (connections.length==0||connections.length>1)
+                  {        
+                     setSelectedRed(element.attr("id"))
+                        alert("ce noeud as "+connections.length+" element suivant ");
+                    return false;
+                  }
+
+                  
+                    var jsonNext ={};
+                    var nextElement=$("#"+connections[0].targetId);
+                    if (nextElement.hasClass("xor2")){
+                      jsonNext=[];
+                      jsonData.Type="xor"
+                    }
+                      
+                    if (getData(nextElement , jsonNext))
+                    {
+                      jsonData.Next=jsonNext;
+                    }
+                    else{
+                     return false; 
+                    }
+                            
+                  
+                }
+            }else{
+              element.attr("visited", "true");
+              var connections=window.instance.getConnections({source:element.attr("id")});
+                  if (connections.length==0)
+                  {        
+                     setSelectedRed(element.attr("id"))
+                        alert("ce noeud n'as pas d'element suivant ");
+                    return false;
+                  }
+                  var jsonNext = {};
+                    var nextElement;
+                  for (var i = 0; i < connections.length; i++) {
+                    jsonNext = {};
+                    nextElement=$("#"+connections[i].targetId);
+                    if (getData(nextElement , jsonNext))
+                    {
+                      jsonData.push(jsonNext);
+                    }
+                    else{
+                     return false; 
+                    }
+                  
+                  }
+
+            }
+            return true;
+      }
       
-      <script>
-       function applyUpdateInfo(id,attribute) {
-      var globalinput=$("#detailEtape");
-      var element=$("#"+globalinput.attr("selectedElement"));
-      var input=$('#'+id)
-      element.attr(attribute,input.prop("value"));
-      if(attribute=="nom")
-        element.text(input.prop("value"))
- }
- function showPanel(id) {
 
-      
-      var panel=$(id);
-      if (panel.attr("selectedElement")!=undefined&&panel.attr("selectedElement")!="") {panel.css("display", "block");}
-      else alert("no element selected")
+    }
+    function isValid(e) {
+      e.preventDefault();
+        $(".node").attr("visited","");
+        $(".xor2").attr("visited","");
+        var start = $(".start2");
+        var jsonData ={};
+        if (start.length != 1)
+           {
 
- }
+            alert('il y as '+start.length+' element start')
+            return false;
+           } 
+        if (getData(start, jsonData)) {
+            var visit= isAllnodeVisited();
+            if (visit) {
+              var flowChartJson = JSON.stringify(jsonData);
+              alert(flowChartJson)
+              $('#jsonText').prop("value",flowChartJson)
+            }
+            return visit
+        }
 
-      </script>
+        else
+        {
 
+          return false;
+
+        }
+            
+
+    }
+     </script>
+    
       <table style="position:absolute; left:100px; top:100px;">
         <tr>
             <td style="width: 100px; height: 25px;">
             </td>
             <td style="width: 200px; height: 25px;"  >
                <button onclick="javascript:showPanel('#detailEtape')">detail etape</button> 
-               <button>detail Rubrique</button>
+               <button onclick="javascript:showPanel('#detailRubrique')">detail Rubrique</button>
             </td>
             <td style="width: 200px; height: 25px;">
                 <button>detail condition</button>
+                <form onsubmit="javascript:isValid(event);" action="#" method="post">
+                  <input  id="jsonText" type="hidden" name="json"  />
+                  <input type="submit" name="compiler" value="compiler" />
+                </form>
             </td>
             <td colspan="2" style="width: 300px; height: 25px;">
                  
@@ -238,15 +230,114 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
             </td>
             <td  colspan="2" rowspan="4">
                 <div class="deposer flowchart-demo container"  id="flowchart"
-                style="display: block;background-color: white"></div>
+                style="display: block;overflow: auto;background-color: white"></div>
             </td>
-            <td   id="detailEtape" colspan="2" rowspan="4" style="display:none">
+            <td   id="panelSaisi" colspan="2" rowspan="4" >
+              <div id="detailEtape" class="panelInfo" style="display:none">
                  <center><b>detail etape</b></center><br/>
                  <br/>
                 Nom :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input   id="inputNom" type="text"  onchange="javascript:applyUpdateInfo('inputNom','nom')"  /><br/><br/>
                 Date Debut :<input id="inputdateDebut" type="date"  onchange="javascript:applyUpdateInfo('inputdateDebut','dateDebut')"  /><br/><br/>
                 Date Fin :&nbsp;&nbsp;&nbsp; <input id="inputdateFin" type="date"  onchange="javascript:applyUpdateInfo('inputdateFin','dateFin')"  /><br/><br/>
+              </div>
+              <div id="detailRubrique" class="panelInfo" style="display:none">
+                Nom :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input   id="inputNom1" type="text"  onchange="javascript:applyUpdateInfo('inputNom1','nom1')"  /><br/><br/>
+              </div>
+            </td>
+             <!--debut ajout/-->
+              <!--td   id="detailrub" colspan="2" rowspan="4" style="display:none">
+                 <center><b>detail rubrique</b></center><br/>
+          <div class="table_content">    
+                 <aside style="width: 900px; ">
+                 <center>
+        <div id="container">
+            <div id="demo_jui">
+          <center>  <table   id="companie" class="display">
+                <thead>
+                    <tr>
+                                    <th style=" border: 0;">Nom de l'�tape</th>
+                                    <th style=" border: 0;">type de l'�tape</th>
+                                    
+    
+                         </tr>  
+             </thead>
+   <span class="niceform">  
+    <tbody>
+                                    
+<c:forEach items="${Etape_generique}" var="m">
+<c:if test="">
+
+<tr>
+<td> ${m.nom_etape_gen}  </td>
+<td> 
+${m.type_etape.NOM_TYPE_ETAPE}
+</td>
+<td>
+<input type="radio" name="etape_gen" value="${m.code_etape_gen}"
+</td>
+
+ <td bgcolor="white">
+  <a href="Editer_Lexique.do?id= ${m.n_lexique} " title="editer">
+ <img src="images/edit.png"/>
+  </a>
+  </td>
+  <td>
+  <a href="supp_lexique.do?id= ${m.n_lexique} " onclick="if(window.confirm('vous voulez Supprimer cette ligne?')){return true;}else{return false;}" title="supprimer">
+  
+  <img src="images/supp.png"/>
+  </a>
+  </td>
+ </tr>
+ </c:forEach>
+ </tbody>
+  </table>
+  </c:if>
+</div>
+</div>  
+<c:if test="!empty id">
+
+<table   id="companie" class="display">
+                <thead>
+                    <tr>
+                                    <th style=" border: 0;">Nom de l'�tape</th>
+                                    <th style=" border: 0;">type de l'�tape</th>
+                                    
+    
+                         </tr>  
+             </thead>
+   <span class="niceform">  
+    <tbody>
+                                    
+<c:forEach items="${rubrique}" var="m">
+<c:if test="">
+
+<tr>
+<td> ${m.NOM_RUBRIQUE}  </td>
+<td> 
+
+</td>
+<td>
+<input type="radio" name="etape_gen" value="${m.NOM_RUBRIQUE}"
+</td>
+
+ <td bgcolor="white">
+  <a href="Editer_Lexique.do?id= ${m.n_lexique} " title="editer">
+ <img src="images/edit.png"/>
+  </a>
+  </td>
+  <td>
+  
+  </td>
+ </tr>
+ </c:forEach>
+ </tbody>
+  </table>
+< input type="submit" value="Ajouter" />
+</c:if>        
+      </td-->
+<!--fin ajout/-->     
         </tr>
+
         <tr>
             <td style="width: 100px; height: 100px;">
                 <div class="xor"
@@ -274,46 +365,33 @@ background-image:linear-gradient(top,#FFFFFF,#FF99FF);
 
 
       
-
-    <!-- JS -->
+<!-- JS -->
     <!-- support lib for bezier stuff -->
-    <script src="js/jsBezier-0.6.js"></script>     
-    <!-- geom functions -->   
+   <script src="js/jsBezier-0.6.js"></script>     
+      
     <script src="js/biltong-0.2.js"></script>
-    <!-- jsplumb util -->
+    
     <script src="js/util.js"></script>
-    <!-- base DOM adapter -->
     <script src="js/dom-adapter.js"></script>        
-    <!-- main jsplumb engine -->
+    
     <script src="js/jsPlumb.js"></script>
-    <!-- endpoint -->
     <script src="js/endpoint.js"></script>                
-    <!-- connection -->
     <script src="js/connection.js"></script>
-    <!-- anchors -->
     <script src="js/anchors.js"></script>        
-    <!-- connectors, endpoint and overlays  -->
     <script src="js/defaults.js"></script>
-    <!-- bezier connectors -->
     <script src="js/connectors-bezier.js"></script>
-    <!-- state machine connectors -->
     <script src="js/connectors-statemachine.js"></script>
-    <!-- flowchart connectors -->
     <script src="js/connectors-flowchart.js"></script>
     <script src="js/connector-editors.js"></script>
-    <!-- SVG renderer -->
     <script src="js/renderers-svg.js"></script>
 
 
-    <!-- vml renderer -->
     <script src="js/renderers-vml.js"></script>
 
-    <!-- jquery jsPlumb adapter -->
     <script src="js/jquery.jsPlumb.js"></script>
-    <!-- /JS -->
-
-    <!-- demo code -->
-    <script src="js/demo.js"/>
+     
+    
+<script src="js/demo.js"></script>
 
 
 
