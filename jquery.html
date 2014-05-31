@@ -38,6 +38,148 @@
     <script src="js/jquery-ui-1.10.4.min.js"></script>
     <script src="js/jquery.ui.touch-punch.min.js"></script>     
      <script type="text/javascript">
+     //parseur condition ***********************************************************
+     var Car_Cour="";
+     var position=0;
+     var sym_cour={};
+     function lire_car(condition)
+    {
+      Car_Cour=condition[position];
+      position++;
+    }
+
+function lire_mot()
+{
+
+  sym_cour.CH=Car_Cour;
+  lire_car();
+  while ((Car_Cour >='0' && Car_Cour<='9') || (Car_Cour >='a' && Car_Cour<='z') || (Car_Cour >='A' && Car_Cour<='Z') )
+  {
+
+
+      sym_cour.CH=sym_cour.CH.concat(Car_Cour);
+      lire_car();
+
+  }
+  sym_cour.cl="ID_TOKEN";
+}
+
+function lire_nombre()
+{
+  sym_cour.CH=Car_Cour;
+  lire_car();
+  while ((Car_Cour >='0' && Car_Cour<='9') )
+  {
+      sym_cour.CH=sym_cour.CH.concat(Car_Cour);
+      lire_car();
+
+  }
+  sym_cour.cl="INUM_TOKEN";
+  if (Car_Cour== '.')
+  {
+    lire_car();
+    while ((Car_Cour >='0' && Car_Cour<='9') )
+    {
+      sym_cour.CH=sym_cour.CH.concat(Car_Cour);
+
+      lire_car();
+
+    }
+    sym_cour.cl="DNUM_TOKEN";
+  }
+}
+
+function symbole_suivant()
+{
+  while (Car_Cour==' '|| Car_Cour=='\n'||Car_Cour=='\t')
+  {
+
+    lire_car();
+  }
+ 
+  
+  
+  if ((Car_Cour >= 'A' && Car_Cour <= 'Z') || (Car_Cour >= 'a' && Car_Cour <= 'z'))
+    lire_mot();
+  else
+    if (Car_Cour >='0' && Car_Cour<='9')
+      lire_nombre();
+    else
+      switch (Car_Cour)
+      { //catégorie des sym spe.
+        case '(': sym_cour.cl="PO_TOKEN"; lire_car();break;
+        case ')': sym_cour.cl = "PF_TOKEN"; lire_car();break;
+        case '.': sym_cour.cl="PT_TOKEN"; lire_car();break;
+        case ',': sym_cour.cl="VIR_TOKEN"; lire_car();break;
+        case '+': sym_cour.cl ="PLUS_TOKEN"; lire_car();break;
+        case '-': sym_cour.cl = "MOINS_TOKEN"; lire_car();break;
+        case '*': sym_cour.cl = "MULT_TOKEN"; lire_car();break;
+        case '%': sym_cour.cl = "MOD_TOKEN"; lire_car();break;
+        case "\0": sym_cour.cl = "END_TOKEN"; lire_car();break;
+        case '"': sym_cour.cl = "STR_TOKEN"; lire_car();break;
+        case '<': sym_cour.cl= "INF_TOKEN"; lire_car();
+          if (Car_Cour=='=')
+          {
+            sym_cour.cl = "INFEG_TOKEN";
+            lire_car();
+          }
+           break;
+        case '>': sym_cour.cl= "SUP_TOKEN"; lire_car();
+          if (Car_Cour=='=')
+          {
+            sym_cour.cl = "SUPEG_TOKEN";
+            lire_car();
+          } break;
+        case '=': sym_cour.cl = "AFF_TOKEN";lire_car();
+          if (Car_Cour=='=')
+          {
+            sym_cour.cl = "EGAL_TOKEN";
+            lire_car();
+          }
+           break;
+        case '!': sym_cour.cl = "NON_TOKEN";lire_car();
+          if (Car_Cour=='=')
+          {
+            sym_cour.cl = "DIFF_TOKEN";
+            lire_car();
+          }
+        case '|':lire_car();
+          if (Car_Cour=='|')
+          {
+            sym_cour.cl = "OR_TOKEN";
+            lire_car();
+          }
+          else{ alert("erreur token | non reconnue (or == || )");}
+        case '&':  lire_car();
+          if (Car_Cour=='&')
+          {
+            sym_cour.cl = "AND_TOKEN";
+            lire_car();
+          }
+          else{ alert("erreur token & non reconnue (or == && )");}
+        break;
+        default : alert("erreur token "+Car_Cour+" non reconnue");lire_car();break;
+
+      }
+  
+}
+function compilation_unit(liste)
+{
+    while(sym_cour.cl!="END_TOKEN")
+    {
+        if (type_declaration(liste))
+        {
+
+        }
+        else return false ;
+    }
+    return true ;
+
+
+}
+
+
+     //fin parseur condition ************************************************************
          var compteurId = 0;
         function getSelected()
         {
@@ -91,6 +233,10 @@
         element.attr(attribute, input.prop("value"));
         if (attribute == "nom")
             element.text(input.prop("value"));
+    }function parseCondition(string){
+      lire_car();
+      symbole_suivant();
+
     }
     function setCondition(){
         var globalinput = $("#panelSaisi");
@@ -116,6 +262,7 @@
           }
         }
         else{
+          var endpoints=window.instance.getEndpoints ( selected.Id );
           for (var i = 0; i < endpoints.length; i++) {
             jsPlumb.deleteEndpoint(endpoints[i]);
           }
