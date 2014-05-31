@@ -258,13 +258,13 @@ function compilation_unit(liste)
           
           var connections=endpoint.connections
           for (var i = 0; i < connections.length; i++) {
-            jsPlumb.detach(connections[i]);
+            window.instance.detach(connections[i]);
           }
         }
         else{
           var endpoints=window.instance.getEndpoints ( selected.Id );
           for (var i = 0; i < endpoints.length; i++) {
-            jsPlumb.deleteEndpoint(endpoints[i]);
+            window.instance.deleteEndpoint(endpoints[i]);
           }
           $("#"+selected.Id).remove();
 
