@@ -39,10 +39,49 @@
     <script src="js/jquery.ui.touch-punch.min.js"></script>     
      <script type="text/javascript">
          var compteurId = 0;
-        function setSelectedRed(element) {
-
+        function getSelected()
+        {
+          var panel=$("#panelSaisi");
+          var id;
+          var type;
+           id=panel.attr("selectedElement");
+          if(id!="" &&id!= undefined)
+           {
+            type="element";
+            return {Id:id,Type:type};
+          }
+          id=panel.attr("selectedXor");
+          if(id!="" &&id!= undefined)
+            {
+              type="xor";
+              return {Id:id,Type:type};
+            }
+          id=panel.attr("selectedConn");
+          if(id!="" &&id!= undefined)
+            {
+              type="connection";
+              return {Id:id,Type:type};
+            }
+            alert('no selected element');
+          return {};
+        }
+        function desselectAll () {
         $(".node").css("border", "");
         $(".xor2").css("border", "");
+        $(".panelInfo").css("display", "none");
+        var input = $("#panelSaisi");
+        input.attr("selectedElement", "");
+        input.attr("selectedConn","");
+        input.attr("selectedXor","");
+        var connections=window.instance.getAllConnections();
+                for (var i = 0; i < connections.length; i++) {
+                    connections[i].setPaintStyle({strokeStyle:"#61B7CF",lineWidth : 1})
+                }
+    
+    }
+        function setSelectedRed(element) {
+
+        desselectAll();
         $("#" + element).css("border", "2px solid red");
     }
     function applyUpdateInfo(id, attribute) {
@@ -53,17 +92,53 @@
         if (attribute == "nom")
             element.text(input.prop("value"));
     }
+    function setCondition(){
+        var globalinput = $("#panelSaisi");
+        var data =  globalinput.attr("selectedConn");
+        var arr = data.split('|');
+        var xor=$("#flowchart"+arr[0]);
+        var input = $('#inputCondition');
+        xor.attr(arr[1], input.prop("value"));
+
+
+    }
+    function supprimmer(){
+      var selected=getSelected();
+      if(selected!={})
+      {
+        var endpoint=window.instance.getEndpoint ( selected.Id ) ;
+        if(selected.Type=="connection")
+        {
+          
+          var connections=endpoint.connections
+          for (var i = 0; i < connections.length; i++) {
+            jsPlumb.detach(connections[i]);
+          }
+        }
+        else{
+          for (var i = 0; i < endpoints.length; i++) {
+            jsPlumb.deleteEndpoint(endpoints[i]);
+          }
+          $("#"+selected.Id).remove();
+
+        }
+      }
+
+
+    }
     function showPanel(id) {
 
         var td = $("#panelSaisi");
         td.children().css("display", "none");
         var panel = $(id);
-        if (td.attr("selectedElement") != undefined
-                && td.attr("selectedElement") != "") {
+        var selected=getSelected();
+        
+        if (selected!={}){ 
+          if (((id=="#detailEtape"||id=="#detailRubrique")&&selected.Type=="element")||(id=="#detailCondition"&&selected.Type=="connection"))
             panel.css("display", "block");
-        } else
-            alert("no element selected");
-
+         else
+            alert("no suitable element selected");
+        }
     }
     function isAllnodeVisited()
     {
@@ -212,9 +287,11 @@
             <td style="width: 200px; height: 25px;"  >
                <button onclick="javascript:showPanel('#detailEtape')">detail etape</button> 
                <button onclick="javascript:showPanel('#detailRubrique')">detail Rubrique</button>
+               <button onclick="javascript:supprimmer()">supprimer</button>
+
             </td>
             <td style="width: 200px; height: 25px;">
-                <button>detail condition</button>
+                <button onclick="javascript:showPanel('#detailCondition')">detail condition</button>
                 <form onsubmit="javascript:isValid(event);" action="#" method="post">
                   <input  id="jsonText" type="hidden" name="json"  />
                   <input type="submit" name="compiler" value="compiler" />
@@ -242,6 +319,9 @@
               </div>
               <div id="detailRubrique" class="panelInfo" style="display:none">
                 Nom :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input   id="inputNom1" type="text"  onchange="javascript:applyUpdateInfo('inputNom1','nom1')"  /><br/><br/>
+              </div>
+              <div id="detailCondition"  class="panelInfo" style="display:none">
+                condition :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input   id="inputCondition" type="text"  onchange="javascript:setCondition();"  /><br/><br/>
               </div>
             </td>
              <!--debut ajout/-->

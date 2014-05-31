@@ -100,21 +100,34 @@ jsPlumb.ready(function() {
 
     var _addEndpoints = function(toId, sourceAnchors, targetAnchors) {
         for (var i = 0; i < sourceAnchors.length; i++) {
-            var sourceUUID = toId + sourceAnchors[i];
+            var sourceUUID = toId +"|"+ sourceAnchors[i];
             instance.addEndpoint("flowchart" + toId, sourceEndpoint, {
                 anchor : sourceAnchors[i],
                 uuid : sourceUUID
             });
         }
         for (var j = 0; j < targetAnchors.length; j++) {
-            var targetUUID = toId + targetAnchors[j];
+            var targetUUID = toId +"|"+ targetAnchors[j];
             instance.addEndpoint("flowchart" + toId, targetEndpoint, {
                 anchor : targetAnchors[j],
                 uuid : targetUUID
             });
         }
     };
-
+    function desselectAll () {
+        $(".node").css("border", "");
+        $(".xor2").css("border", "");
+        $(".panelInfo").css("display", "none");
+        var input = $("#panelSaisi");
+        input.attr("selectedElement", "");
+        input.attr("selectedConn","");
+        input.attr("selectedXor","");
+        var connections=instance.getAllConnections();
+                for (var i = 0; i < connections.length; i++) {
+                    connections[i].setPaintStyle({strokeStyle:"#61B7CF",lineWidth : 1})
+                }
+    
+    }
     // suspend drawing and initialise.
     instance.doWhileSuspended(function() {
 
@@ -145,9 +158,6 @@ jsPlumb.ready(function() {
         // jsPlumb.draggable(document.querySelectorAll(".window"), {
         // grid:
         // [20, 20] });
-        instance.bind("click", function(connector, originalEvent) {
-            confirm("ok");
-        });
         // connect a few up
         // instance.connect({uuids:["Window2BottomCenter",
         // "Window3TopCenter"], editable:true});
@@ -169,9 +179,34 @@ jsPlumb.ready(function() {
         // on click.
         //
         instance.bind("click", function(conn, originalEvent) {
-            if (confirm("Delete connection from " + conn.sourceId
-                    + " to " + conn.targetId + "?"))
-                jsPlumb.detach(conn);
+            source=$("#"+conn.sourceId);
+            panel=$("#panelSaisi")
+            if(source.hasClass("xor2"))
+            {
+                originalEvent.stopPropagation();
+                desselectAll();
+                conn.setPaintStyle({strokeStyle:"#0000FF",lineWidth : 2})
+                panel.attr("selectedConn",conn);
+                var data;
+                if(conn.endpoints[0].isSource)
+                {
+                    data=conn.endpoints[0].getUuid();
+                    
+                }
+                else{
+                    data=conn.endpoints[1].getUuid();                  
+                }
+                panel.attr("selectedConn",data);
+                var inputCondition = $("#inputCondition");
+        inputCondition.prop("value", "");
+        var arr = data.split('|');
+        var xor=$("#flowchart"+arr[0]);
+        inputCondition.prop("value", xor
+                .attr(arr[1]));
+            }
+            else    
+                if (confirm("voulez Vous supprimmer cette connection ?"))
+                    jsPlumb.detach(conn);
         });
 
         instance.bind("connectionDrag", function(connection) {
@@ -195,8 +230,7 @@ jsPlumb.ready(function() {
 
     function setSelected(element) {
 
-        $(".node").css("border", "");
-        $(".xor2").css("border", "");
+        desselectAll();
         var input = $("#panelSaisi");
         input.attr("selectedElement", element);
         $("#" + element).css("border", "2px solid #0000FF");
@@ -204,6 +238,13 @@ jsPlumb.ready(function() {
     function clickFunction(e,box) {
         e.stopPropagation();
         var id = box.attr('id');
+        if (box.hasClass("xor2"))
+        {
+            desselectAll();
+            var input = $("#panelSaisi");
+            input.attr("selectedXor", id);
+            $("#" + id).css("border", "2px solid #0000FF");       
+        }else{
         setSelected(id);
         var inputNom = $("#inputNom");
         var inputDateDebut = $("#inputdateDebut");
@@ -218,6 +259,7 @@ jsPlumb.ready(function() {
         inputDateDebut.prop("value", "");
         inputDateDebut
         .prop("value",box.attr("dateDebut"));
+        }
     }
 
     var compteur = 1;
@@ -337,6 +379,10 @@ jsPlumb.ready(function() {
                         + compteur
                         + '" class="xor2"><div class ="cross"/></div>');
                 // dropped.draggable();
+                dropped
+                .click(function(e) {
+                    clickFunction(e,$(this));
+                });
                 $(this).append(dropped);
 
                 instance.draggable($("#flowchartxor"
@@ -354,11 +400,7 @@ jsPlumb.ready(function() {
     });
 
     $(".deposer").click(function() {
-        $(".node").css("border", "");
-        $(".xor2").css("border", "");
-        $(".panelInfo").css("display", "none");
-        var input = $("#panelSaisi");
-        input.attr("selectedElement", "");
+        desselectAll()
     });
 
 
