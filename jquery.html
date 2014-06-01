@@ -40,7 +40,7 @@
     <script type="text/javascript">
     function creer_feuille_idf(idf)
 {
-  var result = {;
+  var result = {};
   result.Type="IDF";
   result.noeud.idf=idf;
   return result;
@@ -269,7 +269,7 @@ function expression(ast_expr,expr)
 {
     var ast_literal={};
     var literal={};
-    else if (sym_cour.cl=="NON_TOKEN")   // non pas pris en consideration
+     if (sym_cour.cl=="NON_TOKEN")   // non pas pris en consideration
     {
         symbole_suivant();
         if(expression(ast_expr,expr))
@@ -1073,7 +1073,7 @@ return false ;
 }
 
 function readString()
-{ int i =0;
+{ var i =0;
     if(sym_cour.cl==STR_TOKEN)
     {
         while(Car_Cour!='"')
@@ -1091,7 +1091,7 @@ function readString()
     return false ;
 
 }
-
+/*
 function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
 {
     if(sym_cour.cl=="TRUE_TOKEN")
@@ -1147,14 +1147,14 @@ function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
     symbole_suivant();
     return true ;
   }
-      else if(sym_cour.cl==PO_TOKEN)
-        {   T_type T_EXPRESSION;
-        AST AST_EXPRESSION={};
+      else if(sym_cour.cl=="PO_TOKEN")
+        {   var T_EXPRESSION={};
+        var AST_EXPRESSION={};
             symbole_suivant();
             if (expression(&AST_EXPRESSION,&T_EXPRESSION))
              {
                 *T_LITERAL_EXPRESSION=T_EXPRESSION;
-                if(sym_cour.cl==PF_TOKEN)
+                if(sym_cour.cl=="PF_TOKEN")
                 {
                     *AST_LITERAL_EXPRESSION=AST_EXPRESSION;
                     symbole_suivant();
@@ -1172,7 +1172,7 @@ function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
                 return false;}
 return false ;
 
-}
+}*/
 
 
 
