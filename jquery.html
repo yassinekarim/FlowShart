@@ -1233,6 +1233,17 @@ return false ;
     }function parseCondition(string){
       lire_car();
       symbole_suivant();
+      ast={};
+      ast.expression_gauche={};
+      ast.expression_droite={};
+      if (testing_expression(ast)) {
+        alert("true");
+        return true;
+      } else{
+
+        alert("false");
+        return false;
+      }
 
     }
     function setCondition(){
@@ -1241,6 +1252,8 @@ return false ;
         var arr = data.split('|');
         var xor=$("#flowchart"+arr[0]);
         var input = $('#inputCondition');
+        var condition=input.prop("value");
+        if (parseCondition(condition))
         xor.attr(arr[1], input.prop("value"));
 
 
