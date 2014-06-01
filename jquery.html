@@ -47,7 +47,7 @@
 }
 function creer_feuille_nombre(n, t)
 {
-  var result = {};
+  var result = {noeud:{nombre:""},Type:""};
   result.noeud.nombre = n;
   switch(t)
   {
@@ -1092,7 +1092,7 @@ function readString()
     return false ;
 
 }
-/*
+
 function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
 {
     if(sym_cour.cl=="TRUE_TOKEN")
@@ -1115,8 +1115,8 @@ function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
     if(sym_cour.cl=="INUM_TOKEN")
     {
     T_LITERAL_EXPRESSION.Type="T_INT";
-    var n={};
-    n.t_i=transformer_int(sym_cour.CH);
+    var n={t_i:""};
+    n.t_i=sym_cour.CH;
     AST_LITERAL_EXPRESSION=creer_feuille_nombre(n,"T_INT");
     symbole_suivant();
     return true ;
@@ -1140,11 +1140,11 @@ function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
   }
    else if(sym_cour.cl=="ID_TOKEN")  //******************************************************* a faire
     {
-    if(!rechercher(sym_cour.CH))
+    /*if(!rechercher(sym_cour.CH))
       {Erreur(ERR_NON_DECL);}
-    else
-    *T_LITERAL_EXPRESSION=TMP.Type_var;
-    *AST_LITERAL_EXPRESSION=creer_feuille_idf(TMP);
+    else*/
+    T_LITERAL_EXPRESSION.Type="T_INT"//TMP.Type_var;
+    //AST_LITERAL_EXPRESSION=creer_feuille_idf(TMP);
     symbole_suivant();
     return true ;
   }
@@ -1152,28 +1152,28 @@ function literal_expression(AST_LITERAL_EXPRESSION,T_LITERAL_EXPRESSION)
         {   var T_EXPRESSION={};
         var AST_EXPRESSION={};
             symbole_suivant();
-            if (expression(&AST_EXPRESSION,&T_EXPRESSION))
+            if (expression(AST_EXPRESSION,T_EXPRESSION))
              {
-                *T_LITERAL_EXPRESSION=T_EXPRESSION;
+                T_LITERAL_EXPRESSION=T_EXPRESSION;
                 if(sym_cour.cl=="PF_TOKEN")
                 {
-                    *AST_LITERAL_EXPRESSION=AST_EXPRESSION;
+                    AST_LITERAL_EXPRESSION=AST_EXPRESSION;
                     symbole_suivant();
                     return true;
                 }
                 else {return false;}
              }
         }
-        else if(sym_cour.cl==NULL_TOKEN)
+        /*else if(sym_cour.cl==NULL_TOKEN)
         {
             symbole_suivant();
             return true;
-        }
+        }*/
         else {//printf("(,NULL_TOKEN,INUM_TOKEN,DNUM_TOKEN,STR_TOKEN,CARAC_TOKEN,TRUE_TOKENOU FALSE_TOKEN manquant a la ligne %d \n",nbr_ligne);
                 return false;}
 return false ;
 
-}*/
+}
 
 
 
