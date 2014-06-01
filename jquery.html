@@ -75,6 +75,7 @@ function creer_noeud_operation(op,arbre_g,arbre_d)
      var Car_Cour="";
      var position=0;
      var sym_cour={};
+     var condition="";
      function lire_car(condition)
     {
       Car_Cour=condition[position];
@@ -1231,6 +1232,7 @@ return false ;
         if (attribute == "nom")
             element.text(input.prop("value"));
     }function parseCondition(string){
+      window.condition=string;
       lire_car();
       symbole_suivant();
       ast={};
